@@ -1,0 +1,33 @@
+{
+  "name": "present-meteor-angular",
+  "private": "true",
+  "version": "0.0.1",
+  "authors": [
+    "Sinan Bolel <sinanbolel@gmail.com>"
+  ],
+  "description": "Social Computing and Crowdsourcing (SCCS) - Project 1",
+  "homepage": "https://github.com/sbolel/present-meteor-angular#readme",
+  "main": "./src/app.js",
+  "keywords": [
+    "presentation",
+    "social",
+    "computing",
+    "crowdsourcing",
+    "northwestern",
+    "nu",
+    "eecs",
+    "meteor",
+    "angular",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "**/node_modules/*",
+    "**/bower_components/*",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

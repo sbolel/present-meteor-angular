@@ -1,0 +1,52 @@
+{
+  "name": "present-meteor-angular",
+  "private": "true",
+  "version": "0.0.1",
+  "description": "Social Computing and Crowdsourcing (SCCS) - Project 1",
+  "main": "present-meteor.js",
+  "scripts": {
+    "build": "npm install -g ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbolel/present-meteor-angular.git"
+  },
+  "keywords": [
+    "presentation",
+    "social",
+    "computing",
+    "crowdsourcing",
+    "northwestern",
+    "nu",
+    "eecs",
+    "meteor",
+    "angular",
+    "javascript"
+  ],
+  "authors": [
+    "Sinan Bolel <sinanbolel@gmail.com>",
+    "Shannon Nachreiner <shannonnachreiner2012@u.northwestern.edu>",
+    "Alexander Kuntz <alexanderkuntz2014@u.northwestern.edu>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sbolel/present-meteor-angular/issues"
+  },
+  "homepage": "https://github.com/sbolel/present-meteor-angular#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.5.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-qunit": "^0.7.0",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-ng-annotate": "^1.0.1",
+    "grunt-wiredep": "^2.0.0",
+    "wiredep": "^2.2.2"
+  }
+}
