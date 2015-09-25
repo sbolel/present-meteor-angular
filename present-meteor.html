@@ -7,9 +7,16 @@
 	<form class="new-title">
 		<input type="text" name="title"/>
 	</form>
-	  {{> presentation}}
+	
+	
+	<ul>
+		{{#each getSlides}}
+			
+	 	 {{> slide}}
+	 	{{/each}}
+	</ul>
 </body>
 
-<template name="presentation">
-  <p>You've pressed the button {{title}} times.</p>
+<template name="slide">
+  <li>{{content}} {{number}}<button class="delete"> X </button></li>
 </template>

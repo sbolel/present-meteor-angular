@@ -1,29 +1,35 @@
 Slides = new Mongo.Collection("slides");
 
+  	
 if (Meteor.isClient) {
   // counter starts at 0
-  var helpers = Template.presentation.helpers({
-  	slides: function(){
-  		return Slides.find({});
-  	},
-  	title: helpers.slides()[0].title,
-  	items: []
+  Template.body.helpers({
+	getSlides : function(){
+		var s = Slides.find({});
+  		console.log(s.count());
+  		return s;}
   });
   
   Template.body.events({
     "submit .new-title": function (event) {
+    
       // Prevent default browser form submit
       event.preventDefault();
       // Get value from form element
-      var text = event.target.text.value;
+      console.log(event.target.title.value);
+      var text = event.target.title.value;
       // Insert a task into the collection
-      Slides.insert({
-        title: text,
-        items: [] // current time
-      });
+      Slides.insert({content: text, number : Slides.find().count()+1});
       // Clear form
+      event.target.title.value = "";
     }
 
+  });
+  
+  Template.slide.events({
+  	"click .delete": function(){
+  		Slides.remove(this._id);
+  	}
   });
 }
 
