@@ -1,18 +1,29 @@
+Slides = new Mongo.Collection("slides");
+
 if (Meteor.isClient) {
   // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
+  var helpers = Template.presentation.helpers({
+  	slides: function(){
+  		return Slides.find({});
+  	},
+  	title: helpers.slides()[0].title,
+  	items: []
   });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+  
+  Template.body.events({
+    "submit .new-title": function (event) {
+      // Prevent default browser form submit
+      event.preventDefault();
+      // Get value from form element
+      var text = event.target.text.value;
+      // Insert a task into the collection
+      Slides.insert({
+        title: text,
+        items: [] // current time
+      });
+      // Clear form
     }
+
   });
 }
 
