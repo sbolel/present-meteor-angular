@@ -3,34 +3,86 @@ Votes = new Mongo.Collection("votes");
   	
 if (Meteor.isClient) {
 
-   var myVote = {value:0, id:''};
-   Meteor.startup(function(){
-	myVote.id = Votes.insert({value:"0"});
-	
-   });
-  // counter starts at 0
+  var myVote = {value:0, id:''};
+  Meteor.startup(function(){
+	   myVote.id = Votes.insert({value:"0"});
+  });
+
+  function positiveVotes() {
+    return Votes.find({value:"1"}).count();
+  };
+
+  function negativeVotes(){
+    return Votes.find({value:"-1"}).count();
+  };
+
+  function neutralVotes(){
+    return Votes.find({value:"0"}).count();
+  };
+
+  function totalVotes(){
+    return Votes.find({}).count();
+  };
+
   Template.body.helpers({
-	getSlides : function(){
-		var s = Slides.find({});
-  		console.log(s.count());
-  		return s;},
-  	
-  	positiveVotes: function(){
-  		return Votes.find({value:"1"}).count();
-  	},
-   negativeVotes: function(){
-  		return Votes.find({value:"-1"}).count();
-  	},
-   neutralVotes: function(){
-  		return Votes.find({value:"0"}).count();
-  	},
-   totalVotes: function(){
-  		return Votes.find({}).count();
-  	},
+  	getSlides : function(){
+  		var s = Slides.find({});
+    	console.log(s.count());
+    	return s;
+    },
+    
+    positiveVotes: function() {
+      return positiveVotes();
+    },
+    negativeVotes: function() {
+      return negativeVotes();
+    },
+    neutralVotes: function() {
+      return neutralVotes();
+    },
   		
   	votes: function(){
   		return Votes.find({});
-  	}
+  	},
+
+    voteChart: function() {
+      return {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: "Is everybody understanding this?"
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'votes',
+            data: [
+                ['Yes',   positiveVotes()],
+                ['Maybe',  neutralVotes()],
+                ['No',   negativeVotes()]
+            ]
+        }]
+      };
+    }
   });
   
   Template.body.events({
@@ -62,7 +114,6 @@ if (Meteor.isClient) {
   		Slides.remove(this._id);
   	}
   });
-  
 }
 
 if (Meteor.isServer) {
@@ -77,3 +128,5 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+

@@ -21,3 +21,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 urigo:angular
 mizzao:user-status
 underscore
+maazalik:highcharts
