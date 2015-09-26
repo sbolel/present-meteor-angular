@@ -1,5 +1,7 @@
 Slides = new Mongo.Collection("slides");
-
+Negatives = new Mongo.Collection("negatives");
+Neutrals = new Mongo.Collection("neutrals");
+Positives = new Mongo.Collection("positives"); 
   	
 if (Meteor.isClient) {
   // counter starts at 0
@@ -22,6 +24,10 @@ if (Meteor.isClient) {
       Slides.insert({content: text, number : Slides.find().count()+1});
       // Clear form
       event.target.title.value = "";
+    },
+    
+    "change #points": function(event){
+    	console.log(event.currentTarget);
     }
 
   });
@@ -31,6 +37,7 @@ if (Meteor.isClient) {
   		Slides.remove(this._id);
   	}
   });
+  
 }
 
 if (Meteor.isServer) {
