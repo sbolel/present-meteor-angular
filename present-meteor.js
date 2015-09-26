@@ -27,7 +27,7 @@ if (Meteor.isClient) {
     },
     
     "change #points": function(event){
-    	console.log(event.currentTarget);
+    	console.log($("#points").val());
     }
 
   });
