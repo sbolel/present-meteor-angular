@@ -1,1 +1,6 @@
 /* CSS declarations go here */
+
+.screen {
+  min-height: 1vh;
+  height: 100%;
+}

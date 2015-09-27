@@ -5,11 +5,13 @@
     <meta name="author" content="Sinan Bolel <sinanbolel@gmail.com>, Alexander Kuntz <alexanderkuntz2014@u.northwestern.edu>, Shannon Nachreiner <shannonnachreiner2012@u.northwestern.edu> Sinan Bolel <sinanbolel@u.northwestern.edu>">
     <meta name="keywords" content="presentation, present, meteor, meteor.js, northwestern, social, computing, crowdsourcing">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="/present-meteor.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
-<body>
-  <section class="feedback">
+<body class="ion-content">
+  <section class="screen feedback">
     <h1>Give Feedback</h1>
-    <span>:( <input type="range" name="points" id="points" value="0" min="-1" max="1"> :)</span>
+    <span><i class="ion-android-sad"></i> <input type="range" name="points" id="points" value="0" min="-1" max="1"> <i class="ion-android-happy"></i></span>
   </section>
   <section class="present">
     <h1>Present</h1>
@@ -18,9 +20,9 @@
     </div>
     <pre>
       <ul>
-        <li>+ {{positiveVotes}}</li>
+        <li><i class="ion-android-happy"></i> {{positiveVotes}}</li>
         <li>&nbsp; {{neutralVotes}}</li>
-        <li>- {{negativeVotes}}</li>
+        <li><i class="ion-android-sad"></i> {{negativeVotes}}</li>
       </ul>
     </pre>
   </section>
