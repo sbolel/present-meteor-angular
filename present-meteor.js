@@ -1,37 +1,6 @@
 SlidesCollection = new Mongo.Collection("slides");
 VotesCollection = new Mongo.Collection("votes");
 
-function Queue() {
-  "use strict";
-  var _queue = [];
-  this.val = function(){
-    return _queue;
-  };
-  this.length = function(){
-    return _queue.length;
-  };
-  this.first = function(){
-    return _queue[0];
-  };
-  this.last = function(){
-    return _queue[_queue.length];
-  };
-}
-Queue.prototype = {
-  constructor: Queue
-};
-Queue.prototype.get = function(){
-  "use strict";
-  return this.val();
-};
-Queue.prototype.push = function(object){
-  "use strict";
-  return this.val().push(object);
-};
-Queue.prototype.pop = function(){
-  "use strict";
-  return this.val().shift();
-};
 var Vote = function(voteKey, voteValue){
   var that = this;
   this.id;
@@ -58,6 +27,7 @@ Vote.prototype.set = function(value){
   this.value = value;
   return this.value;
 };
+
 var Slide = function(argv){
   var that = this;
   this.template = "";
@@ -113,7 +83,7 @@ var VoteChart = function(type){
       }]
     };
   } else if (type==='gauge'){
-    chart = {
+    _chart = {
 
     };
   }
@@ -122,6 +92,9 @@ var VoteChart = function(type){
   };
   return this.val();
 };
+
+
+
 
 if (Meteor.isClient){
   var myVote;
@@ -156,7 +129,7 @@ if (Meteor.isClient){
       return new VoteChart('pie');
     },
     currentSlide: function() {
-      return getCurrentSlide();
+      return SlidesCollection.findOne({current: {$ne: false}}).content;
     }
   });
 
@@ -189,16 +162,28 @@ if (Meteor.isClient){
 
     },
     "click .next-slide": function() {
-      if (slideIndex < SlidesCollection.find().count() - 1) {
-        slideIndex++;
+      var currentSlide = SlidesCollection.findOne({current: {$ne: false}});
+      if(currentSlide.next){
+        SlidesCollection.update(currentSlide._id, {$set: {current:false}});
+        SlidesCollection.update(currentSlide.next, {$set: {current:true}});
+      } else {
+        console.warn("No next slide");
       }
-
-      console.log(slideIndex);
-      return getCurrentSlide();
     },
     "click .previous-slide" : function() {
-      if (slideIndex > 0) {
-        slideIndex--;
+      var currentSlide = SlidesCollection.findOne({current: {$ne: false}});
+      if(currentSlide.previous){
+        SlidesCollection.update(currentSlide._id, {$set: {current:false}});
+        SlidesCollection.update(currentSlide.previous, {$set: {current:true}});
+      } else {
+        console.warn("No previous slide");
+      }
+    },
+    "click .start-presentation": function(){
+      var slidesArray = SlidesCollection.find().fetch();
+      if(slidesArray.length>0){
+        SlidesCollection.update(slidesArray[0]._id, {$set: {current: true}});
+        console.log("START", SlidesCollection.find().fetch());
       }
     }
   });
@@ -213,20 +198,19 @@ if (Meteor.isClient){
   });
   function positiveVotes() {
     return VotesCollection.find({value:"1"}).count();
-  };
+  }
   function negativeVotes(){
     return VotesCollection.find({value:"-1"}).count();
-  };
+  }
   function neutralVotes(){
     return VotesCollection.find({value:"0"}).count();
-  };
+  }
   function totalVotes(){
     return VotesCollection.find({}).count();
-  };
-  function getCurrentSlide() {
-    return SlidesCollection.find().fetch()[slideIndex].content;
   }
 }
+
+
 
 
 if (Meteor.isServer){
