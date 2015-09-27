@@ -90,11 +90,11 @@ var VoteChart = function(type){
         title: null,
         pane: {
             center: ['50%', '85%'],
-            size: '140%',
+            size: '100%',
             startAngle: -90,
             endAngle: 90,
             background: {
-                backgroundColor: '#EEE',
+                backgroundColor: '#e3e3e3',
                 innerRadius: '60%',
                 outerRadius: '100%',
                 shape: 'arc'
@@ -122,7 +122,7 @@ var VoteChart = function(type){
             min: 0,
             max: totalVotes(),
             title: {
-                text: 'Uncomfortable'
+                text: ''
             }
         },
         plotOptions: {
@@ -138,7 +138,7 @@ var VoteChart = function(type){
             enabled: false
         },
         series: [{
-            name: 'Uncomfortable',
+            name: '',
             data: [negativeVotes()],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:black">{y}</span><br/>' +

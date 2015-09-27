@@ -1,5 +1,8 @@
 /* CSS declarations go here */
 
+body{
+  background-color: white !important;
+}
 .screen {
   height: 100vh;
   border-bottom: 2px solid black;
@@ -7,6 +10,24 @@
 
 .screen .half {
   height: 50vh;
+}
+
+.screen .seventy {
+  height: 70vh;
+}
+
+.screen .ten {
+  min-height: 10vh;
+}
+
+.screen .twenty {
+  height: 20vh;
+  margin-top: 5vh;
+}
+.screen .h-half {
+  max-width: 50%;
+  width: auto;
+  height: 100%;
 }
 
 .center {
@@ -22,4 +43,15 @@
 .ion-large {
   font-size: 2em !important;
   margin: 0em 0.5em;
+}
+
+.slide {
+  margin-top: 20px;
+  background-color: white;
+}
+
+.slide-content {
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }

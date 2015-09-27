@@ -13,14 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
 </head>
-<body class="container">
+<body>
 
-
-  <section class="screen feedback">
-    <div class="half center v-center">
-      {{currentSlide}}
+  <section class="screen feedback" style="background-color:#e3e3e3;">
+    <div class="container">
+    <div class="seventy center slide shadow-z-3">
+      <div class="slide-content v-center">
+        {{currentSlide}}
+      </div>
     </div>
-    <div class="half center v-center">
+    <div class="twenty center">
       <h2>Comfortable?</h2>
       <span>
         <i class="ion-large ion-android-sad"></i>
@@ -28,44 +30,44 @@
         <i class="ion-large ion-android-happy"></i>
       </span>
     </div>
-  </section>
-
-
-  <section class="present">
-    <h1>Present</h1>
-    <div class="chart-container">
-      {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=voteChart}}
     </div>
-    <pre>
-      <ul>
-        <li><i class="ion-android-happy"></i> {{positiveVotes}}</li>
-        <li>&nbsp; {{neutralVotes}}</li>
-        <li><i class="ion-android-sad"></i> {{negativeVotes}}</li>
-      </ul>
-    </pre>
   </section>
-  <section class="edit">
-    <h1>Edit Presentation</h1>
-    <button class="start-presentation">START</button>
+
+
+    <div class="container">
+  <section class="screen present" style="padding-bottom: 170px;">
+  <button class="start-presentation btn btn-default" style="">Start Presentation</button>
+    <div class="half center v-center">
+      <button class="previous-slide btn btn-default pull-left">Previous Slide</button>
+      {{currentSlide}}
+      <button class="next-slide btn btn-default pull-right">Next Slide</button>
+    </div>
+    <div class="half center chart-container container">
+      {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=voteChart}}
     <button class="clear-votes">Clear Votes</button>
-    <form class="new-slide">
-      <input type="text" name="slide" id="new-slide-content"/>
-    </form>
+    </div>
+  </section>
 
-    <button class="previous-slide btn btn-default">Previous Slide</button>
-    {{currentSlide}}
-    <button class="next-slide btn btn-default">Next Slide</button>
 
+  <section class="screen edit" style="padding-top:40px;">
+    <h1 class="center">Edit Presentation</h1>
+    Current Slide: {{currentSlide}}
     <ul>
       {{#each getSlides}}
        {{> slide}}
       {{/each}}
+      <form class="new-slide">
+      <li>
+        <input type="text" name="slide" id="new-slide-content" placeholder="What should be displayed on the new slide?" style="min-width:100%; margin-top:-16px;">
+      </li>
+      </form>
     </ul>
   </section>
+    </div>
 </body>
 
 <template name="slide">
-  <li>{{content}} {{number}}<button class="delete"> X </button></li>
+  <li>{{content}} {{number}}<i class="btn btn-link ion-close-circled delete" style="margin:0;padding:0;"></i></li>
 </template>
 
 <template name="vote">
