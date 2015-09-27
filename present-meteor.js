@@ -123,10 +123,6 @@ var VoteChart = function(type){
   return this.val();
 };
 
-
-var slidesQueue = new Queue();
-
-
 if (Meteor.isClient){
   var myVote;
 
@@ -158,6 +154,9 @@ if (Meteor.isClient){
   	},
     voteChart: function(){
       return new VoteChart('pie');
+    },
+    currentSlide: function() {
+      return getCurrentSlide();
     }
   });
 
@@ -188,6 +187,19 @@ if (Meteor.isClient){
     },
     "click button.add-slide": function(){
 
+    },
+    "click .next-slide": function() {
+      if (slideIndex < SlidesCollection.find().count() - 1) {
+        slideIndex++;
+      }
+
+      console.log(slideIndex);
+      return getCurrentSlide();
+    },
+    "click .previous-slide" : function() {
+      if (slideIndex > 0) {
+        slideIndex--;
+      }
     }
   });
   Template.slide.events({
@@ -211,6 +223,9 @@ if (Meteor.isClient){
   function totalVotes(){
     return VotesCollection.find({}).count();
   };
+  function getCurrentSlide() {
+    return SlidesCollection.find().fetch()[slideIndex].content;
+  }
 }
 
 

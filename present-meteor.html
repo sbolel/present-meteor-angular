@@ -32,6 +32,11 @@
     <form class="new-slide">
       <input type="text" name="slide" id="new-slide-content"/>
     </form>
+
+    <button class="previous-slide">Previous Slide</button>
+    {{currentSlide}}
+    <button class="next-slide">Next Slide</button>
+
     <ul>
       {{#each getSlides}}
        {{> slide}}
