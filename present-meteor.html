@@ -1,48 +1,46 @@
 <head>
-  <title>present-meteor</title>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <title>Present Meteor</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Presentation Suite with Meteor">
+    <meta name="author" content="Sinan Bolel <sinanbolel@gmail.com>, Alexander Kuntz <alexanderkuntz2014@u.northwestern.edu>, Shannon Nachreiner <shannonnachreiner2012@u.northwestern.edu> Sinan Bolel <sinanbolel@u.northwestern.edu>">
+    <meta name="keywords" content="presentation, present, meteor, meteor.js, northwestern, social, computing, crowdsourcing">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
 </head>
-
 <body>
-
-  <h1> Rate This Slide </h1>
-  
-  :(<input type="range" name="points" id="points" value="0" min="-1" max="1"> :)
-  
-	<button class="clear"> Clear Votes </button><br/>
-	
-  {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=voteChart}}	
-
-  Positive Votes {{positiveVotes}}
-  <br/>
-	Neutral Votes {{neutralVotes}}
-  <br/>
-  Negative Votes {{negativeVotes}}
-  <br/>
-	
-  <h1>Add a new slide</h1>
-	<form class="new-title">
-		<input type="text" name="title"/>
-	</form>
-
-	
-	
-	<ul>
-		{{#each getSlides}}
-			
-	 	 {{> slide}}
-	 	{{/each}}
-	</ul>
-
-
+  <section class="feedback">
+    <h1>Give Feedback</h1>
+    <span>:( <input type="range" name="points" id="points" value="0" min="-1" max="1"> :)</span>
+  </section>
+  <section class="present">
+    <h1>Present</h1>
+    <div class="chart-container">
+      {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=voteChart}}
+    </div>
+    <pre>
+      <ul>
+        <li>+ {{positiveVotes}}</li>
+        <li>&nbsp; {{neutralVotes}}</li>
+        <li>- {{negativeVotes}}</li>
+      </ul>
+    </pre>
+  </section>
+  <section class="edit">
+    <h1>Edit Presentation</h1>
+    <button class="clear-votes">Clear Votes</button>
+    <form class="new-slide">
+      <input type="text" name="slide" id="new-slide-content"/>
+    </form>
+    <ul>
+      {{#each getSlides}}
+       {{> slide}}
+      {{/each}}
+    </ul>
+  </section>
 </body>
 
 <template name="slide">
   <li>{{content}} {{number}}<button class="delete"> X </button></li>
 </template>
-
 
 <template name="vote">
   <li>{{id}} {{value}}</li>
