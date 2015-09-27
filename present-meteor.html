@@ -7,12 +7,30 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
     <link rel="stylesheet" href="/present-meteor.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
 </head>
-<body class="ion-content">
+<body class="container">
+
+
   <section class="screen feedback">
-    <h1>Give Feedback</h1>
-    <span><i class="ion-android-sad"></i> <input type="range" name="points" id="points" value="0" min="-1" max="1"> <i class="ion-android-happy"></i></span>
+    <div class="half center v-center">
+      {{currentSlide}}
+    </div>
+    <div class="half center v-center">
+      <h2>Comfortable?</h2>
+      <span>
+        <i class="ion-large ion-android-sad"></i>
+        <input type="range" name="points" id="points" value="0" min="-1" max="1" style="margin-bottom:1em;">
+        <i class="ion-large ion-android-happy"></i>
+      </span>
+    </div>
   </section>
+
+
   <section class="present">
     <h1>Present</h1>
     <div class="chart-container">
@@ -34,9 +52,9 @@
       <input type="text" name="slide" id="new-slide-content"/>
     </form>
 
-    <button class="previous-slide">Previous Slide</button>
+    <button class="previous-slide btn btn-default">Previous Slide</button>
     {{currentSlide}}
-    <button class="next-slide">Next Slide</button>
+    <button class="next-slide btn btn-default">Next Slide</button>
 
     <ul>
       {{#each getSlides}}

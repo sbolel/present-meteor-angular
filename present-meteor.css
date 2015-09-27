@@ -1,6 +1,25 @@
 /* CSS declarations go here */
 
 .screen {
-  min-height: 1vh;
-  height: 100%;
+  height: 100vh;
+  border-bottom: 2px solid black;
+}
+
+.screen .half {
+  height: 50vh;
+}
+
+.center {
+  text-align: center;
+}
+
+.v-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ion-large {
+  font-size: 2em !important;
+  margin: 0em 0.5em;
 }
