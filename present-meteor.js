@@ -163,7 +163,7 @@ if (Meteor.isClient){
   var myVote;
 
   Meteor.startup(function(){
-    var initialVoteValue = "0";
+    var initialVoteValue = "1";
     var initialVoteId = VotesCollection.insert({value: initialVoteValue});
     myVote = new Vote(initialVoteId, initialVoteValue);
     slidesArray = SlidesCollection.find().fetch();
@@ -181,9 +181,6 @@ if (Meteor.isClient){
     },
     negativeVotes: function(){
       return negativeVotes();
-    },
-    neutralVotes: function(){
-      return neutralVotes();
     },
   	votes: function(){
   		return VotesCollection.find({});
@@ -263,9 +260,6 @@ if (Meteor.isClient){
     return VotesCollection.find({value:"1"}).count();
   }
   function negativeVotes(){
-    return VotesCollection.find({value:"-1"}).count();
-  }
-  function neutralVotes(){
     return VotesCollection.find({value:"0"}).count();
   }
   function totalVotes(){
